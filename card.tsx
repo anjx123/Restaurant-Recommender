@@ -5,19 +5,26 @@ import { View, Text, TouchableOpacity, Dimensions,  } from 'react-native';
     type Clickhandler = () => void;
 
     interface CardProps {
-        title: string;
-        content: string;
+        restaurant: Restaurant;
         handleClick: Clickhandler;
     }
 
-    const Card: React.FC<CardProps> = ({title, content, handleClick}) => {
+    export type Restaurant = {
+        name: string;
+        description: string;
+        _id: string;
+        weighted_rating_value: number
+
+      }
+
+    const RestaurantCard: React.FC<CardProps> = ({restaurant, handleClick}) => {
         return (
             <View style={styles.cardTouch}>
                 <TouchableOpacity style={styles.card} onPress={handleClick}>
-                    <Text>{title}</Text>
-                    <Text>{content}</Text>
+                    <Text>{restaurant.name}</Text>
+                    <Text>{restaurant.description}</Text>
+                    <Text>{restaurant.weighted_rating_value}</Text>
                 </TouchableOpacity>
-
             </View>
             
         )
@@ -45,4 +52,4 @@ import { View, Text, TouchableOpacity, Dimensions,  } from 'react-native';
      }
    });
 
-   export default Card;
+   export default RestaurantCard;
