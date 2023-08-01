@@ -21,9 +21,21 @@ import { View, Text, TouchableOpacity, Dimensions,  } from 'react-native';
         return (
             <View style={styles.cardTouch}>
                 <TouchableOpacity style={styles.card} onPress={handleClick}>
-                    <Text>{restaurant.name}</Text>
-                    <Text>{restaurant.description}</Text>
-                    <Text>{restaurant.weighted_rating_value}</Text>
+                    <View>
+                        {restaurant.name !== null ? (
+                            <Text>{restaurant.name}</Text>
+                        ) : null}
+                    </View>
+                    <View>
+                        {restaurant.description !== null ? (
+                            <Text>{restaurant.description}</Text>
+                        ) : null}
+                    </View>
+                    <View>
+                        {restaurant.weighted_rating_value <= 5 ? (
+                            <Text>{restaurant.weighted_rating_value.toFixed(2)}</Text>
+                        ) : null}
+                    </View>
                 </TouchableOpacity>
             </View>
             
