@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import React, { createContext, useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View, Dimensions, TouchableOpacity, } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import RestaurantCard from './card';
-import { ScrollView } from 'react-native';
 import axios from 'axios';
-import { Restaurant } from './card';
-import { PermissionsAndroid } from 'react-native';
-import Geolocation, { GeoPosition } from 'react-native-geolocation-service';
+import { Restaurant } from './components/card';
 import * as Location from 'expo-location';
+
+import { useNavigation } from '@react-navigation/native';
+import { RestaurantContext } from './context/RestaurantContext';
+import RestaurantList from './components/RestaurantList';
+
 
 
 
@@ -18,38 +18,13 @@ import * as Location from 'expo-location';
 //Search Handling
 //Make the card better by adding pictures and whatever
 
-    
+
 
   
 export default function App() {
   const [backgroundColor, setBackgroundColor] = useState(buttonContainerBackgroundColor);
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
-
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Geolocation Permission',
-          message: 'Can we access your location?',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('You can use Geolocation');
-        return true;
-      } else {
-        console.log('Geolocation permission denied');
-        return false;
-      }
-    } catch (err) {
-      console.warn(err);
-      return false;
-    }
-  };
 
   const getLocation = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -88,13 +63,7 @@ export default function App() {
     }
     }, [location]);
 
-  function handleClick() {
-    setBackgroundColor('blue');
-  }
-
   function handleIconClick() {
-    setBackgroundColor('green');
-    console.log(restaurants);
   }
 
   function handleSearchClick() {
@@ -102,29 +71,28 @@ export default function App() {
   }
 
   return (
-    <View style={[styles.container, {backgroundColor}]}>
-      <View style={styles.menuBar}>
-        <TouchableOpacity style={{padding: 10}} onPress={handleIconClick}>
-          <FontAwesome name="bars" size={30} color="grey" />
-        </TouchableOpacity>
-        <Text style={styles.titleText}>Restaurant Recommender</Text>
-        <TouchableOpacity style={{padding: 10}} onPress={handleSearchClick}>
-          <FontAwesome name="search" size={30} color="grey" />
-        </TouchableOpacity>
+    <RestaurantContext.Provider value={restaurants}>
+      <View style={[styles.container, {backgroundColor}]}>
+        <View style={styles.menuBar}>
+          <TouchableOpacity style={{padding: 10}} onPress={handleIconClick}>
+            <FontAwesome name="bars" size={30} color="grey" />
+          </TouchableOpacity>
+          <Text style={styles.titleText}>Restaurant Recommender</Text>
+          <TouchableOpacity style={{padding: 10}} onPress={handleSearchClick}>
+            <FontAwesome name="search" size={30} color="grey" />
+          </TouchableOpacity>
+        </View>
+        <View>
+          <RestaurantList />
+        </View>
+        <View>
+          <Text>
+            {restaurants.length}
+          </Text>
+        </View>
       </View>
-      {restaurants.length == 0 ? (
-        <Text>"Loading"</Text>
-      ) : (<ScrollView> 
-        {restaurants.map(restaurant => (
-          <RestaurantCard key={restaurant._id} restaurant={restaurant} handleClick={handleSearchClick}/>
-        ))}
-      </ScrollView>)}
-      <View>
-        <Text>
-          {restaurants.length}
-        </Text>
-      </View>
-    </View>
+    </RestaurantContext.Provider>
+    
   );
   
 }
