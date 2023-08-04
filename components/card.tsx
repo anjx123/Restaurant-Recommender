@@ -1,13 +1,22 @@
 import { StyleSheet } from 'react-native';
 import React from 'react';
 import { View, Text, TouchableOpacity, Dimensions,  } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/types';
 
 
-    type Clickhandler = () => void;
+    export type StackParams = {
+        Home: undefined;
+        RestaurantInformation: { restaurant: Restaurant };
+    };
+    
+    type HomeScreenNavigationProp = StackNavigationProp<StackParams, 'Home'>;
+    
+    export interface HomeScreenProps {
+        navigation: HomeScreenNavigationProp;
+    }
 
     interface CardProps {
         restaurant: Restaurant;
-        handleClick: Clickhandler;
     }
 
     export type Restaurant = {
@@ -26,12 +35,16 @@ import { View, Text, TouchableOpacity, Dimensions,  } from 'react-native';
       }
     
 
-    const RestaurantCard: React.FC<CardProps> = ({restaurant, handleClick}) => {
+    const RestaurantCard: React.FC<CardProps> = ({restaurant}) => {
         
         const currentDate = new Date();
         const currentWeekday = currentDate.toLocaleDateString('en', { weekday: 'long' }).split(',')[0].trim();;
         const localHours = restaurant.local_hours;
         const currentOperationalHour = localHours?.operational?.[currentWeekday] ?? null;
+
+        function handleClick() {
+
+        }
         
         return (
             <View style={styles.cardTouch}>
