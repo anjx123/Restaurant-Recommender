@@ -10,14 +10,10 @@ import DrawerNavigator from './components/navigation/drawerNavigation';
 import { NavigationContainer } from '@react-navigation/native';
 
 
-
-
-
 //Todo List:
 //Location handling
 //Search Handling
 //Make the card better by adding pictures and whatever
-
 
 
 export default function App() {
@@ -65,7 +61,7 @@ export default function App() {
   return (
     <RestaurantContext.Provider value={ restaurants }>
       <NavigationContainer>
-          <DrawerNavigator/>
+          <StackNavigator/>
       </NavigationContainer>
     </RestaurantContext.Provider>
   );

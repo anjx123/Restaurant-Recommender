@@ -18,7 +18,7 @@ export type RootStackParamList = {
 const StackNavigator = () => {
   return (
         <Stack.Navigator>
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="HomeScreen" component={DrawerNavigator} options={{headerShown: false}}  />
             <Stack.Screen name="RestaurantInformation" component={RestaurantInformationScreen} />
         </Stack.Navigator>
   );

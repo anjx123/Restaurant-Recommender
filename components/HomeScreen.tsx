@@ -3,11 +3,10 @@ import { View, TouchableOpacity, Text, Dimensions, StyleSheet } from 'react-nati
 import RestaurantList from './RestaurantList';
 
 function HomeScreen() {
-  const [backgroundColor, setBackgroundColor] = useState();
 
 
   return (
-      <View style={[styles.container, {backgroundColor}]}>
+      <View style={[styles.container]}>
         <View>
           <RestaurantList />
         </View>
@@ -33,7 +32,6 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      backgroundColor: '#ccc',
       alignItems: 'center',
       justifyContent: 'flex-start',
       flexDirection: 'column',
