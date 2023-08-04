@@ -1,15 +1,14 @@
 import { RouteProp } from '@react-navigation/native';
-import { StackParams } from './card';
 import { View, Text } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from './navigation/stackNavigation';
 
-type RestaurantInformationScreenRouteProp = RouteProp<
-  StackParams,
-  'RestaurantInformation'
->;
+import React from 'react';
 
-interface RestaurantInformationScreenProps {
-  route: RestaurantInformationScreenRouteProp;
-}
+type RestaurantInformationScreenProps = {
+    navigation: StackNavigationProp<RootStackParamList, 'RestaurantInformation'>;
+    route: RouteProp<RootStackParamList, 'RestaurantInformation'>;
+};
 
 const RestaurantInformationScreen: React.FC<RestaurantInformationScreenProps> = ({
   route,
@@ -21,7 +20,7 @@ const RestaurantInformationScreen: React.FC<RestaurantInformationScreenProps> = 
 
   return (
     <View>
-        <Text>"Amogus" + {restaurant._id}</Text>
+        <Text>{restaurant._id}</Text>
     </View>
   );
 };

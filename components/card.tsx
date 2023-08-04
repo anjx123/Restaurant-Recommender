@@ -2,18 +2,8 @@ import { StyleSheet } from 'react-native';
 import React from 'react';
 import { View, Text, TouchableOpacity, Dimensions,  } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/types';
-
-
-    export type StackParams = {
-        Home: undefined;
-        RestaurantInformation: { restaurant: Restaurant };
-    };
-    
-    type HomeScreenNavigationProp = StackNavigationProp<StackParams, 'Home'>;
-    
-    export interface HomeScreenProps {
-        navigation: HomeScreenNavigationProp;
-    }
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from './navigation/stackNavigation';
 
     interface CardProps {
         restaurant: Restaurant;
@@ -42,8 +32,10 @@ import { StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/
         const localHours = restaurant.local_hours;
         const currentOperationalHour = localHours?.operational?.[currentWeekday] ?? null;
 
-        function handleClick() {
+        const stackNavigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
+        function handleClick() {
+            stackNavigation.navigate('RestaurantInformation', { restaurant });
         }
         
         return (

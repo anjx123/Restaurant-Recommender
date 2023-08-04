@@ -2,14 +2,12 @@ import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Restaurant } from './components/card';
 import * as Location from 'expo-location';
-
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-
 import 'react-native-gesture-handler';
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import HomeScreen from './components/HomeScreen';
-import Recommender from './components/Recommender';
-import { createStackNavigator } from '@react-navigation/stack';
+import StackNavigator from './components/navigation/stackNavigation';
+import { RestaurantContext } from './context/RestaurantContext';
+import { View, Text } from 'react-native';
+import DrawerNavigator from './components/navigation/drawerNavigation';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 
@@ -19,9 +17,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 //Location handling
 //Search Handling
 //Make the card better by adding pictures and whatever
-
-
-const Drawer = createDrawerNavigator();
 
 
 
@@ -68,14 +63,11 @@ export default function App() {
 
 
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home">
-          {props => <HomeScreen {...props} restaurants={restaurants} />}
-        </Drawer.Screen>
-        <Drawer.Screen name="Other" component={Recommender} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <RestaurantContext.Provider value={ restaurants }>
+      <NavigationContainer>
+          <DrawerNavigator/>
+      </NavigationContainer>
+    </RestaurantContext.Provider>
   );
   
 }

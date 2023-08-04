@@ -5,17 +5,9 @@ import RestaurantCard from './card';
 import { RestaurantContext } from '../context/RestaurantContext';
 
 
-
-import { useNavigation } from '@react-navigation/native';
-
-export default function RestaurantList() {
+const RestaurantList = () => {
     const restaurants = useContext(RestaurantContext);
-    function handleSearchClick() {
-    }
-    // const uniqueRestaurants = Array.from(restaurants
-    //     .map(restaurant => [restaurant])
-    //     .reduce((accumulator, restaurant) => 
-    //       accumulator.set(restaurant[0]._id, restaurant[0]), new Map()).values()); Prevents duplicate id's
+
 
     return (
         <React.Fragment>
@@ -23,9 +15,11 @@ export default function RestaurantList() {
                 <Text>"Loading"</Text>
             ) : (<ScrollView> 
                 {restaurants.map(restaurant => (
-                <RestaurantCard key={restaurant._id} restaurant={restaurant} handleClick={handleSearchClick}/>
+                <RestaurantCard key={restaurant._id} restaurant={restaurant}/>
                 ))}
             </ScrollView>)}
         </React.Fragment> 
     )
 }
+
+export default RestaurantList;
