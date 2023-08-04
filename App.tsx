@@ -48,10 +48,10 @@ export default function App() {
   useEffect(() => {
     const apiKey = "0ba712cbd46a43089eca6bf1474177de";
     if (location) {
-      const url = `https://api.spoonacular.com/food/restaurants/search?apiKey=${apiKey}&lat=${location.coords.latitude}&lng=${location.coords.longitude}&budget=20&number=5`;
+      const url = `https://api.spoonacular.com/food/restaurants/search?apiKey=${apiKey}&lat=${location.coords.latitude}&lng=${location.coords.longitude}&number=0`;
       axios.get(url)
       .then(response => {
-        setRestaurants(response.data.restaurants.slice(0,5));
+        setRestaurants(response.data.restaurants);
         console.log("search success");
       })
       .catch(error => {

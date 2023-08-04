@@ -22,9 +22,6 @@ function HomeScreen({ restaurants }: HomeScreenProps) {
     navigation.openDrawer();
   }
 
-  function handleSearchClick() {
-  }
-
   return (
     <RestaurantContext.Provider value={restaurants}>
       <View style={[styles.container, {backgroundColor}]}>
