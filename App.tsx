@@ -9,6 +9,8 @@ import 'react-native-gesture-handler';
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeScreen from './components/HomeScreen';
 import Recommender from './components/Recommender';
+import { createStackNavigator } from '@react-navigation/stack';
+
 
 
 
@@ -20,7 +22,9 @@ import Recommender from './components/Recommender';
 
 
 const Drawer = createDrawerNavigator();
-  
+
+
+
 export default function App() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
@@ -62,8 +66,6 @@ export default function App() {
     }
     }, [location]);
 
-  function handleIconClick() {
-  }
 
   return (
     <NavigationContainer>

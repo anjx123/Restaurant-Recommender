@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { RestaurantContext } from '../context/RestaurantContext';
 import RestaurantList from './RestaurantList';
-import { Restaurant } from './card';
+import { Restaurant, StackParams } from './card';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type DrawerNavProp = DrawerNavigationProp<any>;
 
@@ -17,6 +18,7 @@ type HomeScreenProps = {
 function HomeScreen({ restaurants }: HomeScreenProps) {
   const [backgroundColor, setBackgroundColor] = useState();
   const navigation = useNavigation<DrawerNavProp>();
+  const stackNavigation = useNavigation<StackNavigationProp<StackParams, 'Home'>>();
 
   function handleIconClick() {
     navigation.openDrawer();
@@ -35,7 +37,7 @@ function HomeScreen({ restaurants }: HomeScreenProps) {
           </TouchableOpacity>
         </View> */}
         <View>
-          <RestaurantList />
+          <RestaurantList navigation={stackNavigation}/>
         </View>
         <View>
           <Text>
