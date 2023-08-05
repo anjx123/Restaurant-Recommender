@@ -15,12 +15,9 @@ const RestaurantInformationScreen: React.FC<RestaurantInformationScreenProps> = 
 }) => {
   const { restaurant } = route.params;
 
-  
-
-
   return (
     <View>
-        <Text>{restaurant._id}</Text>
+        <Text>Mogus would like to eat at: {restaurant.name} !!</Text>
     </View>
   );
 };

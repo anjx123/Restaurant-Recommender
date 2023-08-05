@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, Dimensions, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import RestaurantList from './RestaurantList';
 
 function HomeScreen() {
@@ -14,34 +14,13 @@ function HomeScreen() {
   );
 }
 
-  
-
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
-  
-
 const styles = StyleSheet.create({
-    menuBar: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-      width: screenWidth,
-      borderWidth: 2, 
-      borderColor: 'black',
-      borderRadius: 5,
-    },
     container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'flex-start',
       flexDirection: 'column',
     },
-    titleText: {
-      fontSize: screenWidth * .05,
-      padding: screenWidth * .05,
-      textAlign: 'center',
-    },
-  
   });
   
 

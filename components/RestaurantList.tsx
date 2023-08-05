@@ -7,8 +7,7 @@ import { RestaurantContext } from '../context/RestaurantContext';
 
 const RestaurantList = () => {
     const restaurants = useContext(RestaurantContext);
-
-
+    
     return (
         <React.Fragment>
             {restaurants.length == 0 ? (
