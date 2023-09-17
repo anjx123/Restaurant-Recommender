@@ -20,6 +20,12 @@ export default function App() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
 
+  function bif(bruh = 2) {
+    console.log(bruh);
+    return bruh;
+  }
+
+
   const getLocation = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
@@ -48,6 +54,8 @@ export default function App() {
       .then(response => {
         setRestaurants(response.data.restaurants);
         console.log("search success");
+        
+        bif(6);
       })
       .catch(error => {
         console.error(error);
