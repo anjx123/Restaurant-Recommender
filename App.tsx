@@ -54,8 +54,6 @@ export default function App() {
       .then(response => {
         setRestaurants(response.data.restaurants);
         console.log("search success");
-        
-        bif(6);
       })
       .catch(error => {
         console.error(error);
